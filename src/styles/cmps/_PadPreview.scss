@@ -1,0 +1,27 @@
+.pad-preview {
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+    transition: transform 0.1s, box-shadow 0.1s;
+    &:hover {
+        transform: scale(1.01);
+    }
+    &.active {
+        box-shadow: 1px 1px 10px 5px #ccc;
+    }
+    > button {
+        height: inherit;
+        width: inherit;
+        border: none;
+        color: white;
+        background-color: #333;
+        border-radius: inherit;
+
+        > span {
+            display: block;
+            font-weight: 600;
+            // max-width: 150px;
+            // margin: auto;
+        }
+    }
+}

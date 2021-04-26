@@ -1,0 +1,17 @@
+.home-page {
+    .global-play-container {
+        display: flex;
+        background-color: white;
+        padding: 5px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        > button {
+            border: none;
+            background-color: transparent;
+        }
+        .play-time-status {
+            width: 100%;
+        }
+    }
+}
