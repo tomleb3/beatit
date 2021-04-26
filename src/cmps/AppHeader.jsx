@@ -5,7 +5,7 @@ export const AppHeader = () => {
     return <header className="app-header">
         <section className="main-layout flex j-between a-center">
             <div className="logo flex a-center">
-                <img src={'/favicon.png'} alt="" />
+                <img src={'./favicon.png'} alt="" />
                 <NavLink to="/">BEAT IT</NavLink>
             </div>
             <nav>
