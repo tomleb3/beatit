@@ -21,7 +21,7 @@ export const Home = () => {
         <PadList pads={pads} activeTracks={activeTracks} manageQueue={manageQueue}
             isLoopRunning={isLoopRunning} toggleLoopRunning={toggleLoopRunning} />
         <div className="global-play-container">
-            <button>
+            <button onClick={() => window.location.reload()}>
                 {activeTracks.length ? <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 480 480" xmlSpace="preserve" height="40px" width="40px">
                     <path d="M240,0C107.452,0,0,107.452,0,240s107.452,240,240,240c132.486-0.15,239.85-107.514,240-240C480,107.452,372.548,0,240,0z
