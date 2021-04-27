@@ -1,7 +1,10 @@
 export const utilService = {
     delay,
     getRandomInt,
-    makeId
+    makeId,
+    saveToStorage,
+    loadFromStorage,
+    removeFromStorage
 }
 
 function delay(ms = 1500) {
@@ -13,7 +16,8 @@ function delay(ms = 1500) {
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min) + min);
+    //The maximum is exclusive and the minimum is inclusive
 }
 
 function makeId(length = 5) {
@@ -23,4 +27,16 @@ function makeId(length = 5) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return txt;
+}
+
+function saveToStorage(key, val) {
+    const str = JSON.stringify(val)
+    localStorage.setItem(key, str)
+}
+function loadFromStorage(key) {
+    const str = localStorage.getItem(key)
+    return JSON.parse(str)
+}
+function removeFromStorage(key) {
+    localStorage.removeItem(key)
 }

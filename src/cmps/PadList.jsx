@@ -1,11 +1,12 @@
 import { PadPreview } from './PadPreview.jsx'
 
-export const PadList = ({ pads, activeTracks, manageQueue, isLoopRunning, toggleLoopRunning }) => {
+export const PadList = ({ pads, activeTrackIds, manageQueue,
+    isPlaying, toggleIsPlaying, recSettings, handleRec }) => {
 
     return <section className="pad-list main-layout">
         {pads.map(pad => {
-            return <PadPreview key={pad._id} pad={pad} activeTracks={activeTracks} manageQueue={manageQueue}
-                isLoopRunning={isLoopRunning} toggleLoopRunning={toggleLoopRunning} />
+            return <PadPreview key={pad._id} pad={pad} activeTrackIds={activeTrackIds} manageQueue={manageQueue}
+                isPlaying={isPlaying} toggleIsPlaying={toggleIsPlaying} recSettings={recSettings} handleRec={handleRec} />
         })}
     </section>
 }

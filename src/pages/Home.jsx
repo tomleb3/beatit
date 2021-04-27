@@ -1,53 +1,111 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { PadList } from '../cmps/PadList'
 import { padService } from '../services/padService'
+import { utilService } from '../services/utilService'
+
+// SVGs -
+import playBtnIco from '../assets/imgs/btn-play.svg'
+import stopBtnIco from '../assets/imgs/btn-stop.svg'
+import recBtnIco from '../assets/imgs/btn-rec.svg'
+import clearBtnIco from '../assets/imgs/btn-clear.svg'
+import recIndicationIco from '../assets/imgs/rec-indication.svg'
+
+
+//// To whomever this may concern, I welcome you to my freshly-made "BEAT IT" looper ReactJS app.
+//// As I've mentioned in the letter I sent together with the app,
+//// the finished product, while mostly operational,
+//// resulted in being slightly more complex to understand than I initially intended.
+//// Hence, I left comments wherever necessary.
+//// Feel free to have a look around :)
 
 export const Home = () => {
 
     let pads = padService.query()
-    const [activeTracks, setActiveTracks] = useState([])
-    const [isLoopRunning, toggleLoopRunning] = useState(false)
+    const STORAGE_KEY = 'REC'
+    const recordingFromStorage = utilService.loadFromStorage(STORAGE_KEY)
+    const [activeTrackIds, setActiveTrackIds] = useState([])
+    const [isPlaying, toggleIsPlaying] = useState(false)
+    const [recSettings, setRecSettings] = useState({
+        recIsOn: false,
+        iteration: 0,
+        recording: recordingFromStorage || []
+    })
 
     const manageQueue = pad => {
-        if (activeTracks.includes(pad._id)) {
-            setActiveTracks(activeTracks.filter(padId => {
+        // In charge of dynamically inserting/removing IDs from "activeTrackIds"
+        if (activeTrackIds.includes(pad._id)) {
+            setActiveTrackIds(activeTrackIds.filter(padId => {
                 return padId !== pad._id
             }))
         }
-        else setActiveTracks([...activeTracks, pad._id])
+        else setActiveTrackIds([...activeTrackIds, pad._id])
     }
 
+    // From this point on, all 4 remaining function deal only with recording logic
+    const onToggleRec = () => {
+        setRecSettings({
+            ...recSettings,
+            recIsOn: !recSettings.recIsOn,
+            iteration: 0
+        })
+    }
+
+    const handleRec = () => {
+        // In charge of advancing the iteration count,
+        // as well as adding a new activeIds array into the recorded data
+        setRecSettings({
+            ...recSettings,
+            iteration: recSettings.iteration + 1,
+            recording: [...recSettings.recording, activeTrackIds]
+        })
+    }
+
+    const onRecPlayback = () => {
+        // In charge of dynamic playback/stop (specifically for the recording)
+        if (isPlaying) {
+            utilService.saveToStorage(STORAGE_KEY, recSettings.recording)
+            return window.location.reload() // temp solution
+        }
+        setActiveTrackIds(recSettings.recording[recSettings.iteration])
+        setRecSettings({ ...recSettings, iteration: recSettings.iteration + 1 })
+        setTimeout(() => toggleIsPlaying(true), 5)
+    }
+
+    const onClearRec = () => {
+        // Clearing from localStorage and re-initializing "recSettings"
+        utilService.removeFromStorage(STORAGE_KEY)
+        setRecSettings({
+            ...recSettings,
+            recIsOn: false,
+            iteration: 0,
+            recording: []
+        })
+    }
+
+    console.log(activeTrackIds)
+    console.log(recSettings)
+
     return <section className="home-page">
-        <PadList pads={pads} activeTracks={activeTracks} manageQueue={manageQueue}
-            isLoopRunning={isLoopRunning} toggleLoopRunning={toggleLoopRunning} />
-        <div className="global-play-container">
-            <button onClick={() => window.location.reload()}>
-                {activeTracks.length ? <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                    viewBox="0 0 480 480" xmlSpace="preserve" height="40px" width="40px">
-                    <path d="M240,0C107.452,0,0,107.452,0,240s107.452,240,240,240c132.486-0.15,239.85-107.514,240-240C480,107.452,372.548,0,240,0z
-			 M240,464C116.288,464,16,363.712,16,240S116.288,16,240,16c123.653,0.141,223.859,100.347,224,224
-			C464,363.712,363.712,464,240,464z"/>
-                    <path d="M200,136c-4.418,0-8,3.582-8,8v192c0,4.418,3.582,8,8,8s8-3.582,8-8V144C208,139.582,204.418,136,200,136z" />
-                    <path d="M280,136c-4.418,0-8,3.582-8,8v192c0,4.418,3.582,8,8,8s8-3.582,8-8V144C288,139.582,284.418,136,280,136z" />
-                </svg>
-                    : <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                        viewBox="0 0 512 512" xmlSpace="preserve" height="40px" width="40px">
-                        <path d="M256,0C114.833,0,0,114.844,0,256s114.833,256,256,256s256-114.844,256-256S397.167,0,256,0z M256,490.667
-				C126.604,490.667,21.333,385.396,21.333,256S126.604,21.333,256,21.333S490.667,126.604,490.667,256S385.396,490.667,256,490.667
-				z"/>
-                        <path d="M357.771,247.031l-149.333-96c-3.271-2.135-7.5-2.25-10.875-0.396C194.125,152.51,192,156.094,192,160v192
-				c0,3.906,2.125,7.49,5.563,9.365c1.583,0.865,3.354,1.302,5.104,1.302c2,0,4.021-0.563,5.771-1.698l149.333-96
-				c3.042-1.958,4.896-5.344,4.896-8.969S360.813,248.99,357.771,247.031z M213.333,332.458V179.542L332.271,256L213.333,332.458z"
-                        />
-                    </svg>}
+        <PadList pads={pads} activeTrackIds={activeTrackIds} manageQueue={manageQueue} isPlaying={isPlaying}
+            toggleIsPlaying={toggleIsPlaying} recSettings={recSettings} handleRec={handleRec} />
+        {recSettings.recIsOn && <img src={recIndicationIco} alt="rec-indication" />}
+        <div className="global-play-container flex">
+            <button onClick={onRecPlayback}>
+                {isPlaying ? <img src={stopBtnIco} alt="stop" />
+                    : <img src={playBtnIco} alt="play" />}
             </button>
-            <button>
-                <svg height="40px" viewBox="0 0 512 512" width="40px" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m512 256c0 141.386719-114.613281 256-256 256s-256-114.613281-256-256 114.613281-256 256-256 256 114.613281 256 256zm0 0" fill="#e76e54" />
-                    <path d="m384 256c0 70.691406-57.308594 128-128 128s-128-57.308594-128-128 57.308594-128 128-128 128 57.308594 128 128zm0 0" fill="#dd523c" /></svg>
+            <button onClick={onToggleRec}>
+                <img src={recBtnIco} alt="rec" />
             </button>
-            <div className={`play-time-status ${isLoopRunning ? 'active' : ''}`}>
+            <div className={`play-time-status flex a-center ${isPlaying ? 'active' : ''}`}>
                 <span></span>
+                {recSettings.recording.length && !recSettings.recIsOn ?
+                    <Fragment>
+                        <label className="muted">* Recording available</label>
+                        <button onClick={onClearRec}>
+                            <img src={clearBtnIco} alt="clear" />
+                        </button>
+                    </Fragment> : null}
             </div>
         </div>
     </section>

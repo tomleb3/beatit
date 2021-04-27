@@ -1,15 +1,25 @@
 .home-page {
+    > img {
+        height: 50px;
+        position: absolute;
+        bottom: 48px;
+        left: 10px;
+    }
     .global-play-container {
-        display: flex;
         background-color: white;
         padding: 5px;
         position: fixed;
         width: 100%;
         bottom: 0;
-        > button {
+        button {
             border: none;
             background-color: transparent;
-            margin-inline-end: 5px;
+            &:not(:last-of-type) {
+                margin-inline-end: 5px;
+            }
+            img {
+                height: 40px;
+            }
         }
         .play-time-status {
             width: 100%;
@@ -19,6 +29,11 @@
                 display: block;
                 position: absolute;
                 border-left: 2px solid gray;
+            }
+            > label {
+                margin: auto;
+                font-weight: 700;
+                color: rgb(212, 42, 84);
             }
             &.active {
                 > span {
