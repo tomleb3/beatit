@@ -3,6 +3,26 @@
     width: 100%;
     border-radius: 7px;
     transition: transform 0.1s, box-shadow 0.1s;
+
+    animation: intro-anim 0.3s ease-in 0s 1;
+    @keyframes intro-anim {
+        0% {
+            transform: scale(0.2);
+        }
+        25% {
+            transform: scale(0.4);
+        }
+        50% {
+            transform: scale(0.6);
+        }
+        75% {
+            transform: scale(0.8);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
     &:hover {
         transform: scale(1.01);
     }
@@ -20,8 +40,6 @@
         > span {
             display: block;
             font-weight: 600;
-            // max-width: 150px;
-            // margin: auto;
         }
     }
 }

@@ -46,7 +46,9 @@ export const Home = () => {
                     <path d="m512 256c0 141.386719-114.613281 256-256 256s-256-114.613281-256-256 114.613281-256 256-256 256 114.613281 256 256zm0 0" fill="#e76e54" />
                     <path d="m384 256c0 70.691406-57.308594 128-128 128s-128-57.308594-128-128 57.308594-128 128-128 128 57.308594 128 128zm0 0" fill="#dd523c" /></svg>
             </button>
-            <div className="play-time-status"></div>
+            <div className={`play-time-status ${isLoopRunning ? 'active' : ''}`}>
+                <span></span>
+            </div>
         </div>
     </section>
 }

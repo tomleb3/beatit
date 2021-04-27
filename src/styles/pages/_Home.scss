@@ -9,9 +9,42 @@
         > button {
             border: none;
             background-color: transparent;
+            margin-inline-end: 5px;
         }
         .play-time-status {
             width: 100%;
+            position: relative;
+            > span {
+                height: 100%;
+                display: block;
+                position: absolute;
+                border-left: 2px solid gray;
+            }
+            &.active {
+                > span {
+                    animation: play-anim 8.045688s linear 0s infinite normal forwards;
+                    @keyframes play-anim {
+                        0% {
+                            left: 0%;
+                        }
+                        20% {
+                            left: 20%;
+                        }
+                        40% {
+                            left: 40%;
+                        }
+                        60% {
+                            left: 60%;
+                        }
+                        80% {
+                            left: 80%;
+                        }
+                        100% {
+                            left: 100%;
+                        }
+                    }
+                }
+            }
         }
     }
 }
