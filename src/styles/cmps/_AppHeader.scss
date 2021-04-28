@@ -8,15 +8,24 @@
     section {
         height: inherit;
         .logo {
-            img{
-             margin-inline-end: 10px;   
+            img {
+                margin-inline-end: 10px;
             }
-            a{
-            font-size: 1.5em;
+            a {
+                font-size: 1.5em;
             }
         }
-        nav *:not(:last-child) {
-            margin-inline-end: 25px;
+        nav {
+            > button {
+                border: none;
+                background-color: transparent;
+                .help-btn-svg {
+                    transform: translateY(4px);
+                }
+            }
+            *:not(:last-child) {
+                margin-inline-end: 20px;
+            }
         }
     }
 }

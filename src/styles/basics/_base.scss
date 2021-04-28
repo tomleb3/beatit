@@ -36,5 +36,30 @@
         textarea {
             resize: none;
         }
+
+        div.ReactModalPortal {
+            div.help-modal-content {
+                * {
+                    display: block;
+                    margin-bottom: 5px;
+                }
+                .instructions {
+                    border: 1px solid lightgray;
+                    padding: 10px;
+                    @media (min-height: 600px) {
+                        line-height: 25px;
+                        margin: 20px 0;
+                    }
+                    > label {
+                        font-weight: 600;
+                    }
+                }
+                button {
+                    border: none;
+                    font-size: 1em;
+                    background-color: transparent;
+                }
+            }
+        }
     }
 }

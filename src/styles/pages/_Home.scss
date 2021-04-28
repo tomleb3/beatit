@@ -41,7 +41,6 @@
             &.active {
                 > span {
                     animation: play-anim linear 0s infinite normal forwards;
-                    // animation-duration: 8.045688s;
                     @keyframes play-anim {
                         0% {
                             left: 0%;

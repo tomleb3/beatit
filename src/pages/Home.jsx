@@ -16,14 +16,14 @@ export const Home = () => {
     const STORAGE_KEY = 'REC'
     const seekAnimDuration = 8.045688
     const svgBaseUrl = `${process.env.PUBLIC_URL}/assets/imgs/`
-    const recordingFromStorage = utilService.loadFromStorage(STORAGE_KEY)
+    const recFromStorage = utilService.loadFromStorage(STORAGE_KEY)
     const [activeTrackIds, setActiveTrackIds] = useState([])
     const [isPlaying, toggleIsPlaying] = useState(false)
     const [recSettings, setRecSettings] = useState({
         recIsOn: false,
         playbackMode: false,
         iteration: 0,
-        recording: recordingFromStorage || []
+        recording: recFromStorage || []
     })
 
     const manageQueue = pad => {
@@ -33,7 +33,7 @@ export const Home = () => {
                 return padId !== pad._id
             }))
         }
-        else setActiveTrackIds([...activeTrackIds, pad._id])
+        else setActiveTrackIds(activeTrackIds ? [...activeTrackIds, pad._id] : [pad._id])
     }
 
     // From this point on, all 4 remaining function deal only with recording logic
@@ -43,7 +43,6 @@ export const Home = () => {
             recIsOn: !recSettings.recIsOn,
             iteration: 0
         })
-        utilService.saveToStorage(STORAGE_KEY, recSettings.recording)
     }
 
     const handleRec = () => {
@@ -60,7 +59,8 @@ export const Home = () => {
 
     const onRecPlayback = () => {
         // In charge of dynamic playback/stop (specifically for the recording)
-        if (isPlaying) return window.location.reload() // temp solution
+        if (isPlaying) onStopAll()
+        setActiveTrackIds(recSettings.recording[recSettings.iteration])
         setRecSettings({
             ...recSettings,
             playbackMode: recSettings.iteration !== recSettings.recording.length,
@@ -68,8 +68,11 @@ export const Home = () => {
                 0 : recSettings.iteration + 1
             // ^ This condition allows for recording to be replayed more than once by resetting the iteration count
         })
-        setActiveTrackIds(recSettings.recording[recSettings.iteration])
-        setTimeout(() => toggleIsPlaying(true), 5)
+    }
+
+    const onStopAll = () => {
+        utilService.saveToStorage(STORAGE_KEY, recSettings.recording)
+        return window.location.reload() // temp solution
     }
 
     const onClearRec = () => {
@@ -84,29 +87,33 @@ export const Home = () => {
         })
     }
 
-    console.log(recSettings.iteration)
+    window.addEventListener('keyup', ev => {
+        if (ev.code === 'Space' || ev.code === 'Enter') onRecPlayback()
+    })
+
     return <section className="home-page">
         <PadList pads={pads} activeTrackIds={activeTrackIds} manageQueue={manageQueue} isPlaying={isPlaying}
             toggleIsPlaying={toggleIsPlaying} recSettings={recSettings} handleRec={handleRec} onRecPlayback={onRecPlayback} />
         {recSettings.recIsOn && <img src={`${svgBaseUrl}rec-indication.svg`} alt="rec-indication" />}
         <div className="global-play-container flex">
-            <button onClick={onRecPlayback}>
-                {isPlaying ? <img src={`${svgBaseUrl}btn-stop.svg`} alt="stop" />
+            <button className={recSettings.recording.length ? '' : 'disabled'}
+                onClick={recSettings.recording.length ? onRecPlayback : null}>
+                {recSettings.playbackMode ? <img src={`${svgBaseUrl}btn-stop.svg`} alt="stop" />
                     : <img src={`${svgBaseUrl}btn-play.svg`} alt="play" />}
             </button>
             <button className={recSettings.playbackMode ? 'disabled' : ''}
-                onClick={!recSettings.playbackMode && onToggleRec}>
+                onClick={!recSettings.playbackMode ? onToggleRec : null}>
                 <img src={`${svgBaseUrl}btn-rec.svg`} alt="rec" />
             </button>
             <div className={`play-time-status flex a-center ${isPlaying ? 'active' : ''}`}>
-                <span style={{
+                {recSettings.playbackMode && <span style={{
                     animationDuration: `${seekAnimDuration * recSettings.recording.length}s`,
                     animationDelay: `${-seekAnimDuration * (recSettings.iteration - 1)}s`
-                }}></span>
+                }}></span>}
                 {recSettings.recording.length && !recSettings.recIsOn ?
                     <Fragment>
                         <label className={`muted ${recSettings.playbackMode ? 'playback-mode' : ''}`}>
-                            {recSettings.playbackMode ? 'PLAYING RECORDING' : '* Recording available'}
+                            {recSettings.playbackMode ? 'PLAYING RECORDING' : '* Recording available *'}
                         </label>
                         <button onClick={onClearRec}>
                             <img src={`${svgBaseUrl}btn-clear.svg`} alt="clear" />
