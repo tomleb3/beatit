@@ -34,10 +34,14 @@
                 margin: auto;
                 font-weight: 700;
                 color: rgb(212, 42, 84);
+                &.playback-mode {
+                    color: rgb(18, 124, 18);
+                }
             }
             &.active {
                 > span {
-                    animation: play-anim 8.045688s linear 0s infinite normal forwards;
+                    animation: play-anim linear 0s infinite normal forwards;
+                    // animation-duration: 8.045688s;
                     @keyframes play-anim {
                         0% {
                             left: 0%;

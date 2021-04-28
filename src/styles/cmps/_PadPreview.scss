@@ -38,8 +38,10 @@
         border-radius: inherit;
 
         > span {
-            display: block;
             font-weight: 600;
+            @media (min-width:700px){
+                font-size: 1.5em;
+            }
         }
     }
 }
