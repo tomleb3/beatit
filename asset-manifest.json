@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/beatit/static/css/main.2ff3178f.chunk.css",
-    "main.js": "/beatit/static/js/main.14b26c08.chunk.js",
-    "main.js.map": "/beatit/static/js/main.14b26c08.chunk.js.map",
+    "main.js": "/beatit/static/js/main.62b2269a.chunk.js",
+    "main.js.map": "/beatit/static/js/main.62b2269a.chunk.js.map",
     "runtime-main.js": "/beatit/static/js/runtime-main.5a540058.js",
     "runtime-main.js.map": "/beatit/static/js/runtime-main.5a540058.js.map",
     "static/js/2.0976e33d.chunk.js": "/beatit/static/js/2.0976e33d.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.5a540058.js",
     "static/js/2.0976e33d.chunk.js",
     "static/css/main.2ff3178f.chunk.css",
-    "static/js/main.14b26c08.chunk.js"
+    "static/js/main.62b2269a.chunk.js"
   ]
 }
