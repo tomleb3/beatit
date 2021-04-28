@@ -85,6 +85,7 @@ export const Home = () => {
             iteration: 0,
             recording: []
         })
+        return window.location.reload() // temp solution
     }
 
     window.addEventListener('keyup', ev => {
