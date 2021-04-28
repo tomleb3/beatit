@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/beatit/static/css/main.fcba3377.chunk.css",
+    "main.css": "/beatit/static/css/main.2ff3178f.chunk.css",
     "main.js": "/beatit/static/js/main.14b26c08.chunk.js",
     "main.js.map": "/beatit/static/js/main.14b26c08.chunk.js.map",
     "runtime-main.js": "/beatit/static/js/runtime-main.5a540058.js",
@@ -12,13 +12,13 @@
     "index.html": "/beatit/index.html",
     "service-worker.js": "/beatit/service-worker.js",
     "service-worker.js.map": "/beatit/service-worker.js.map",
-    "static/css/main.fcba3377.chunk.css.map": "/beatit/static/css/main.fcba3377.chunk.css.map",
+    "static/css/main.2ff3178f.chunk.css.map": "/beatit/static/css/main.2ff3178f.chunk.css.map",
     "static/js/2.0976e33d.chunk.js.LICENSE.txt": "/beatit/static/js/2.0976e33d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5a540058.js",
     "static/js/2.0976e33d.chunk.js",
-    "static/css/main.fcba3377.chunk.css",
+    "static/css/main.2ff3178f.chunk.css",
     "static/js/main.14b26c08.chunk.js"
   ]
 }
