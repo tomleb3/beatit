@@ -97,7 +97,7 @@ export const Home = () => {
             toggleIsPlaying={toggleIsPlaying} recSettings={recSettings} handleRec={handleRec} onRecPlayback={onRecPlayback} />
         {recSettings.recIsOn && <img src={`${svgBaseUrl}rec-indication.svg`} alt="rec-indication" />}
         <div className="global-play-container flex">
-            <button className={recSettings.recording.length && !isPlaying ? '' : 'disabled'}
+            <button className={recSettings.recording.length ? '' : 'disabled'}
                 onClick={recSettings.recording.length ? onRecPlayback : null}>
                 {recSettings.playbackMode ? <img src={`${svgBaseUrl}btn-stop.svg`} alt="stop" />
                     : <img src={`${svgBaseUrl}btn-play.svg`} alt="play" />}
