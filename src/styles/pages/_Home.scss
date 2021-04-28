@@ -19,6 +19,9 @@
             }
             img {
                 height: 40px;
+                @media (max-width: 350px) {
+                    height: 30px;
+                }
             }
         }
         .play-time-status {
@@ -36,6 +39,9 @@
                 color: rgb(212, 42, 84);
                 &.playback-mode {
                     color: rgb(18, 124, 18);
+                }
+                @media (max-width: 350px) {
+                    font-size: rem(12px);
                 }
             }
             &.active {
