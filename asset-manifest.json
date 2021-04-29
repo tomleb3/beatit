@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/beatit/static/css/main.2ff3178f.chunk.css",
-    "main.js": "/beatit/static/js/main.0a84c336.chunk.js",
-    "main.js.map": "/beatit/static/js/main.0a84c336.chunk.js.map",
+    "main.css": "/beatit/static/css/main.1c8c3764.chunk.css",
+    "main.js": "/beatit/static/js/main.d161edb5.chunk.js",
+    "main.js.map": "/beatit/static/js/main.d161edb5.chunk.js.map",
     "runtime-main.js": "/beatit/static/js/runtime-main.5a540058.js",
     "runtime-main.js.map": "/beatit/static/js/runtime-main.5a540058.js.map",
     "static/js/2.0976e33d.chunk.js": "/beatit/static/js/2.0976e33d.chunk.js",
@@ -12,13 +12,13 @@
     "index.html": "/beatit/index.html",
     "service-worker.js": "/beatit/service-worker.js",
     "service-worker.js.map": "/beatit/service-worker.js.map",
-    "static/css/main.2ff3178f.chunk.css.map": "/beatit/static/css/main.2ff3178f.chunk.css.map",
+    "static/css/main.1c8c3764.chunk.css.map": "/beatit/static/css/main.1c8c3764.chunk.css.map",
     "static/js/2.0976e33d.chunk.js.LICENSE.txt": "/beatit/static/js/2.0976e33d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5a540058.js",
     "static/js/2.0976e33d.chunk.js",
-    "static/css/main.2ff3178f.chunk.css",
-    "static/js/main.0a84c336.chunk.js"
+    "static/css/main.1c8c3764.chunk.css",
+    "static/js/main.d161edb5.chunk.js"
   ]
 }
