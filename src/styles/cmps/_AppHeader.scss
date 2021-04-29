@@ -8,8 +8,10 @@
     section {
         height: inherit;
         .logo {
-            img {
+            > img {
                 margin-inline-end: 10px;
+                height: 64px;
+                width: 64px;
             }
             a {
                 font-size: 1.5em;

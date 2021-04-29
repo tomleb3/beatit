@@ -23,7 +23,7 @@ export const AppHeader = () => {
     return <header className="app-header">
         <section className="main-layout flex j-between a-center">
             <div className="logo flex a-center">
-                <img src={`${process.env.PUBLIC_URL}/favicon.png`} alt="" />
+                <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="" />
                 <NavLink to="/">BEAT IT</NavLink>
             </div>
             <nav>
