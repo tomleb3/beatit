@@ -22,10 +22,10 @@ export const AppHeader = () => {
 
     return <header className="app-header">
         <section className="main-layout flex j-between a-center">
-            <div className="logo flex a-center">
+            <NavLink to="/" className="logo flex a-center">
                 <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="" />
-                <NavLink to="/">BEAT IT</NavLink>
-            </div>
+                <label>BEAT IT</label>
+            </NavLink>
             <nav>
                 <button onClick={openModal}>
                     <svg className="help-btn-svg" viewBox="-30 -210 2570 2248" height="3.15em" width="3.15em">

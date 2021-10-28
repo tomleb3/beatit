@@ -15,7 +15,7 @@ export const Home = () => {
     let pads = padService.query()
     const STORAGE_KEY = 'REC'
     const seekAnimDuration = 8.045688
-    const svgBaseUrl = `${process.env.PUBLIC_URL}/assets/imgs/`
+    const svgBaseUrl = `${process.env.PUBLIC_URL}/assets/imgs`
     const recFromStorage = utilService.loadFromStorage(STORAGE_KEY)
     const [activeTrackIds, setActiveTrackIds] = useState([])
     const [isPlaying, toggleIsPlaying] = useState(false)
@@ -95,16 +95,16 @@ export const Home = () => {
     return <section className="home-page">
         <PadList pads={pads} activeTrackIds={activeTrackIds} manageQueue={manageQueue} isPlaying={isPlaying}
             toggleIsPlaying={toggleIsPlaying} recSettings={recSettings} handleRec={handleRec} onRecPlayback={onRecPlayback} />
-        {recSettings.recIsOn && <img src={`${svgBaseUrl}rec-indication.svg`} alt="rec-indication" />}
+        {recSettings.recIsOn && <img src={`${svgBaseUrl}/rec-indication.svg`} alt="rec-indication" />}
         <div className="global-play-container flex">
             <button className={recSettings.recording.length ? '' : 'disabled'}
                 onClick={recSettings.recording.length ? onRecPlayback : null}>
-                {recSettings.playbackMode ? <img src={`${svgBaseUrl}btn-stop.svg`} alt="stop" />
-                    : <img src={`${svgBaseUrl}btn-play.svg`} alt="play" />}
+                {recSettings.playbackMode ? <img src={`${svgBaseUrl}/btn-stop.svg`} alt="stop" />
+                    : <img src={`${svgBaseUrl}/btn-play.svg`} alt="play" />}
             </button>
             <button className={recSettings.playbackMode ? 'disabled' : ''}
                 onClick={!recSettings.playbackMode ? onToggleRec : null}>
-                <img src={`${svgBaseUrl}btn-rec.svg`} alt="rec" />
+                <img src={`${svgBaseUrl}/btn-rec.svg`} alt="rec" />
             </button>
             <div className={`play-time-status flex a-center ${isPlaying ? 'active' : ''}`}>
                 {recSettings.playbackMode && <span style={{
@@ -117,7 +117,7 @@ export const Home = () => {
                             {recSettings.playbackMode ? 'PLAYING RECORDING' : '* Recording available *'}
                         </label>
                         <button onClick={onClearRec}>
-                            <img src={`${svgBaseUrl}btn-clear.svg`} alt="clear" />
+                            <img src={`${svgBaseUrl}/btn-clear.svg`} alt="clear" />
                         </button>
                     </Fragment> : null}
             </div>
